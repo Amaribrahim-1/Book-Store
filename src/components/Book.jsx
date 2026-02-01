@@ -1,20 +1,31 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartProvider";
 
-import { Edit, Star, Trash2 } from "lucide-react";
-import { showNotification } from "../utils/showNotification";
-import { useBooks } from "../contexts/BooksProvider";
+import { Star } from "lucide-react";
 import { useAuth } from "../contexts/AuthProvider";
+import { useBooks } from "../contexts/BooksProvider";
+import useIsAdminRoute from "../hooks/useIsAdminRoute";
+import { showNotification } from "../utils/showNotification";
 import AdminActions from "./AdminActions";
 
 function Book({ book }) {
   const { addToCart } = useCart();
   const { addToWishList, favoriteBooks, removeFromWishList } = useBooks();
-  const { role } = useAuth();
+  const isAdminRoute = useIsAdminRoute();
+  const { isAuthenticated } = useAuth();
 
   const isBookExisted = favoriteBooks.find((favBook) => favBook.id === book.id);
 
   function handleClick(book) {
+    if (!isAuthenticated) {
+      showNotification(
+        "info",
+        "You need to be logged in to continue",
+        localStorage.getItem("theme"),
+      );
+      return;
+    }
+
     if (isBookExisted) removeFromWishList(book.id);
     else addToWishList(book);
 
@@ -28,24 +39,29 @@ function Book({ book }) {
   return (
     <li className="book-card">
       <div className="book-card__image">
-        <Star
-          size={30}
-          className={isBookExisted ? `star clicked` : `star`}
-          onClick={() => handleClick(book)}
-        />
+        {!isAdminRoute && (
+          <Star
+            size={30}
+            className={isBookExisted ? `star clicked` : `star`}
+            onClick={() => handleClick(book)}
+          />
+        )}
 
         {/* Stock Badge */}
-        {/* {book.stock === 0 ? (
-          <span className="stock-badge out">Out of stock</span>
-        ) : (
-          <span className="stock-badge in">In stock: {book.stock}</span>
-        )} */}
+        {isAdminRoute &&
+          (book.stock === 0 ? (
+            <span className="stock-badge out">Out of stock</span>
+          ) : (
+            <span className="stock-badge in">In stock: {book.stock}</span>
+          ))}
 
         <img alt={book.img} src={book.img} />
         <div className="book-card__overlay">
-          <Link to={`/${book.id}`}>
-            <button className="btn btn--primary">View Details</button>
-          </Link>
+          {!isAdminRoute && (
+            <Link to={`/${book.id}`}>
+              <button className="btn btn--primary">View Details</button>
+            </Link>
+          )}
         </div>
       </div>
       <div className="book-card__content">
@@ -54,15 +70,17 @@ function Book({ book }) {
         <p className="book-card__author">By {book.author}</p>
         <div className="book-card__footer">
           <div className="book-card__rating">⭐ {book.rating}</div>
-          <span className="book-card__price">${book.price}.00</span>
+          <span className="book-card__price">${book.price}</span>
         </div>
-        <button
-          className="btn btn--primary btn--block"
-          onClick={() => addToCart(book)}
-        >
-          Add to Cart
-        </button>
-        {role === "admin" ? <AdminActions book={book} /> : null}
+        {!isAdminRoute && (
+          <button
+            className="btn btn--primary btn--block"
+            onClick={() => addToCart(book)}
+          >
+            Add to Cart
+          </button>
+        )}
+        {isAdminRoute && <AdminActions book={book} />}
       </div>
     </li>
   );

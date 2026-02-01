@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useAuth } from "./AuthProvider";
 
 const BooksContext = createContext();
 
@@ -13,17 +14,28 @@ function BooksProvider({ children }) {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { isAuthenticated } = useAuth();
 
   const [favoriteBooks, setFavoriteBooks] = useState(
     () => JSON.parse(localStorage.getItem("favoriteBooks")) || [],
   );
 
-  useEffect(
-    function () {
-      localStorage.setItem("favoriteBooks", JSON.stringify(favoriteBooks));
-    },
-    [favoriteBooks],
-  );
+  useEffect(() => {
+    if (isAuthenticated) {
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favoriteBooks")) || [];
+      console.log(storedFavorites);
+      setFavoriteBooks(storedFavorites);
+    } else {
+      setFavoriteBooks([]);
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    localStorage.setItem("favoriteBooks", JSON.stringify(favoriteBooks));
+  }, [favoriteBooks, isAuthenticated]);
 
   const addToWishList = useCallback(function addToWishList(newBook) {
     setFavoriteBooks((favoriteBooks) => {
@@ -79,6 +91,7 @@ function BooksProvider({ children }) {
       value={{
         books,
         isLoading,
+        setIsLoading,
         addToWishList,
         removeFromWishList,
         favoriteBooks,

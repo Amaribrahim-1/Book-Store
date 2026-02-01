@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Book from "../components/Book";
-import Header from "../components/Header";
-import Main from "../components/Main";
 import { useBooks } from "../contexts/BooksProvider";
 
 function WishList() {
@@ -24,28 +22,25 @@ function WishList() {
         </div>
       </div>
     );
+
   return (
-    <>
-      <Header />
-      <Main>
-        <section className="page books-page">
-          <div className="container">
-            <div className="books-page__content">
-              <div className="books-page__results">
-                <div className="results-header">
-                  <p>{favoriteBooks.length} books found</p>
-                </div>
-                <div className="books-grid">
-                  {favoriteBooks.map((book) => (
-                    <Book book={book} key={book.id} />
-                  ))}
-                </div>
-              </div>
+    <section className="page books-page">
+      <div className="container">
+        <div className="books-page__content">
+          <div className="books-page__results">
+            <div className="results-header">
+              <p>{favoriteBooks.length} books found</p>
+            </div>
+
+            <div className="books-grid">
+              {favoriteBooks.map((book) => (
+                <Book book={book} key={book.id} />
+              ))}
             </div>
           </div>
-        </section>
-      </Main>
-    </>
+        </div>
+      </div>
+    </section>
   );
 }
 

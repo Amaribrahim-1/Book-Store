@@ -23,7 +23,7 @@ function NavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { cartBadge } = useCart();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, role } = useAuth();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);

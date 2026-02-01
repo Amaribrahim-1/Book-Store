@@ -1480,7 +1480,7 @@ books-related__title {
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 80px);
-  background-color: var(--color-bg-secondary);
+  /* background-color: var(--color-bg-secondary); */
 }
 
 .login-container {
@@ -1824,161 +1824,6 @@ books-related__title {
   display: block;
 }
 
-/* modal v1 */
-/* .modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: var(--color-bg-overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--z-modal-backdrop);
-}
-
-
-.modal {
-  position: relative;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  width: 100%;
-  max-width: 420px;
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-xl);
-  animation: modalFadeIn var(--transition-base);
-  z-index: var(--z-modal);
-}
-
-.modal--sm {
-  max-width: 380px;
-}
-
-.modal--md {
-  max-width: 500px;
-}
-
-.modal--lg {
-  max-width: 720px;
-}
-
-
-.modal__title {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  margin-bottom: var(--spacing-md);
-}
-
-
-.modal-close {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
-  background: transparent;
-  border: none;
-  font-size: var(--font-size-lg);
-  cursor: pointer;
-  color: var(--color-text-tertiary);
-  transition: color var(--transition-fast);
-}
-
-.modal-close:hover {
-  color: var(--color-text-primary);
-}
-
-
-.modal__content {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-
-.confirm-warning {
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-sm);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-}
-
-.confirm-warning--danger {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: var(--color-error);
-  border: 1px solid var(--color-error);
-}
-
-.confirm-warning--warning {
-  background-color: rgba(245, 158, 11, 0.1);
-  color: var(--color-warning);
-  border: 1px solid var(--color-warning);
-}
-
-
-.confirm-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
-}
-
-.confirm-actions button {
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  border: none;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    opacity var(--transition-fast);
-}
-
-.confirm-actions button:first-child {
-  background-color: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
-}
-
-.confirm-actions button:first-child:hover {
-  background-color: var(--color-bg-secondary);
-}
-
-.confirm-actions button:last-child {
-  background-color: var(--color-error);
-  color: #fff;
-}
-
-.confirm-actions button:last-child:hover {
-  opacity: 0.9;
-}
-
-.confirm-actions button.btn--danger {
-  background-color: var(--color-error);
-  color: white;
-}
-
-.confirm-actions button.btn--danger:hover {
-  opacity: 0.9;
-}
-
-.confirm-actions button.btn--warning {
-  background-color: var(--color-warning);
-  color: white;
-}
-
-.confirm-actions button.btn--warning:hover {
-  opacity: 0.9;
-}
-
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-} */
-
 /* Cooooooooooooooooooooooonfirm */
 /* ===============================
    CONFIRM MODAL OVERLAY
@@ -2218,6 +2063,7 @@ books-related__title {
 .btn-icon-small--edit {
   color: #3b82f6;
   border-color: #3b82f6;
+  cursor: not-allowed;
 }
 
 .btn-icon-small--edit:hover {
@@ -2242,13 +2088,12 @@ books-related__title {
    BOOK FORM
    ============================================================================ */
 
-.book-form {
+/* .book-form {
   padding: var(--spacing-2xl);
   overflow-y: auto;
   flex: 1;
 }
 
-/* Scoped Book Form rules (prevent affecting other forms) */
 .book-form .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2300,14 +2145,12 @@ books-related__title {
   max-width: 200px;
 }
 
-/* Form Row - scoped to book-form */
 .book-form .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
 }
 
-/* Form Group (scoped) */
 .book-form .form-group {
   display: flex;
   flex-direction: column;
@@ -2321,7 +2164,6 @@ books-related__title {
   font-size: var(--font-size-sm);
 }
 
-/* Form Input (scoped) */
 .book-form .form-input {
   padding: var(--spacing-md);
   border: 1px solid var(--color-border);
@@ -2343,7 +2185,6 @@ books-related__title {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* Error State (scoped) */
 .book-form .form-input--error {
   border-color: var(--color-error);
 }
@@ -2365,7 +2206,6 @@ books-related__title {
   line-height: 1.6;
 }
 
-/* Image Preview (scoped) */
 .book-form .image-preview {
   margin-top: var(--spacing-md);
   border-radius: var(--radius-lg);
@@ -2380,10 +2220,6 @@ books-related__title {
   display: block;
 }
 
-/* ============================================================================
-   FORM ACTIONS (FOOTER BUTTONS) - scoped
-   ============================================================================ */
-
 .book-form .form-actions {
   display: flex;
   gap: var(--spacing-md);
@@ -2393,9 +2229,311 @@ books-related__title {
   border-top: 1px solid var(--color-border);
 }
 
-/* Add Book Button with Icon (scoped) */
 .book-form .form-actions .btn {
   min-width: 140px;
+}
+*/
+
+/* ============================================================================
+   EDIT / ADD BOOK MODAL
+   Depends on existing .modal & .modal-backdrop
+   ============================================================================ */
+/* ============================================================================
+   EDIT / ADD BOOK MODAL – CLEAN ADMIN STYLE
+   Uses existing variables from index.css
+   ============================================================================ */
+
+/* ===============================
+   MODAL OVERLAY
+================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg-overlay);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--spacing-lg);
+  z-index: var(--z-modal-backdrop);
+}
+
+/* ===============================
+   MODAL CONTAINER
+================================ */
+
+.modal {
+  width: 100%;
+  max-height: 90vh;
+
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  animation: modalFadeIn var(--transition-base);
+}
+
+/* Size */
+.modal--large {
+  max-width: 860px;
+}
+
+/* ===============================
+   MODAL HEADER
+================================ */
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: var(--spacing-lg) var(--spacing-xl);
+
+  /* background-color: var(--color-bg-secondary); */
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal__header h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Close button */
+.modal__close {
+  border: none;
+  background: transparent;
+
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--radius-full);
+  cursor: pointer;
+
+  color: var(--color-text-secondary);
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.modal__close:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+/* ===============================
+   FORM BODY
+================================ */
+
+.book-form {
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+/* Rows */
+.book-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .book-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Group */
+.book-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Label */
+.book-form__label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* Inputs */
+.book-form__input {
+  height: 40px;
+  padding: 0 0.75rem;
+
+  font-size: var(--font-size-sm);
+
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.book-form__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+/* Textarea */
+.book-form__textarea {
+  height: auto;
+  min-height: 100px;
+  padding: 0.75rem;
+  resize: vertical;
+}
+
+/* ===============================
+   FILE UPLOAD
+================================ */
+
+.book-form__file {
+  padding: 0.5rem;
+  font-size: var(--font-size-sm);
+
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+
+  background-color: var(--color-bg-secondary);
+  cursor: pointer;
+}
+
+.book-form__file::file-selector-button {
+  margin-right: var(--spacing-sm);
+  padding: 0.4rem 0.75rem;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background-color: var(--color-primary);
+  color: #fff;
+
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.book-form__file::file-selector-button:hover {
+  opacity: 0.9;
+}
+
+/* ===============================
+   IMAGE PREVIEW (OPTIONAL)
+================================ */
+
+.book-form__image-preview {
+  margin-top: var(--spacing-sm);
+  max-width: 140px;
+
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.book-form__image-preview img {
+  display: block;
+  width: 100%;
+}
+
+/* ===============================
+   ACTIONS (STICKY FOOTER)
+================================ */
+
+.book-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+
+  border-top: 1px solid var(--color-border);
+}
+
+/* Mobile actions */
+@media (max-width: 480px) {
+  .book-form__actions {
+    flex-direction: column;
+  }
+
+  .book-form__actions button {
+    width: 100%;
+  }
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===============================
+   ADD BOOK FLOATING BUTTON
+================================ */
+
+.add-book-btn {
+  position: fixed;
+  top: 90px; /* تحت الهيدر */
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: var(--z-fixed);
+
+  padding: 0.75rem 1.75rem;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+
+  border-radius: var(--radius-full);
+  border: none;
+
+  background-color: var(--color-primary);
+  color: white;
+
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.add-book-btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.add-book-btn:active {
+  transform: translateX(-50%) translateY(0);
 }
 
 /* ============================================================================
@@ -2550,4 +2688,8 @@ books-related__title {
 [data-theme="dark"] .btn-icon-small--edit:hover,
 [data-theme="dark"] .btn-icon-small--delete:hover {
   color: white;
+}
+
+.btn-icon-small--edit {
+  cursor: not-allowed;
 }

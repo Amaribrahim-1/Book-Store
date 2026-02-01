@@ -2,9 +2,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
 
 function AdminRoute() {
-  const { isAuthenticated } = useAuth();
+  const { role } = useAuth();
 
-  if (!isAuthenticated) {
+  if (role !== "admin") {
     return <Navigate to="/login" replace />;
   }
 

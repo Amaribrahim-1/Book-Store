@@ -1,7 +1,5 @@
-import NavBar from "./NavBar";
-
-function Header() {
-  return <NavBar />;
+function Header({ children }) {
+  return children;
 }
 
 export default Header;

@@ -1,9 +1,6 @@
 import Book from "./Book";
 
 function BooksPageContent({ displayedBooks }) {
-  // Current page?
-  // const []
-
   return (
     <section className="books-page__content">
       <div className="books-page__results">
@@ -11,11 +8,12 @@ function BooksPageContent({ displayedBooks }) {
           {/* <p>{displayedBooks.length} books found in this page</p> */}
           {/* <p><span>{displayedBooks.length}</span> books found</p> */}
         </div>
-        <div className="books-grid">
+
+        <ul className="books-grid">
           {displayedBooks.map((book) => (
             <Book book={book} key={book.id} />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -1,15 +1,12 @@
-import Header from "../components/Header";
-import Main from "../components/Main";
-import Footer from "../components/Footer";
-import BooksPageHeader from "../components/BooksPageHeader";
-import BooksPageControls from "../components/BooksPageControls";
-import BooksPageContent from "../components/BooksPageContent";
-import { useBooks } from "../contexts/BooksProvider.jsx";
-import { useEffect, useState } from "react";
-import Spinner from "../components/Spinner.jsx";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import BooksPageContent from "../components/BooksPageContent";
+import BooksPageControls from "../components/BooksPageControls";
+import BooksPageHeader from "../components/BooksPageHeader";
+import Spinner from "../components/Spinner.jsx";
+import { useBooks } from "../contexts/BooksProvider.jsx";
 
-function BooksPage({ children }) {
+function BooksPage() {
   const { books, isLoading } = useBooks();
   const [search, setSearch] = useState("");
   const [filterOption, setFilterOption] = useState("All");
@@ -77,53 +74,47 @@ function BooksPage({ children }) {
   if (isLoading) return <Spinner message={"Loading books..."} />;
 
   return (
-    <>
-      <Header />
-      <Main>
-        <div className="page books-page">
-          <div className="container">
-            <BooksPageHeader NumberOfBooks={books.length} />
-            <BooksPageControls
-              search={search}
-              setSearch={setSearch}
-              filterOption={filterOption}
-              setFilterOption={setFilterOption}
-              categories={categories}
-            />
-            <BooksPageContent displayedBooks={paginatedBooks} />
+    <div className="page books-page">
+      <div className="container">
+        <BooksPageHeader NumberOfBooks={books.length} />
+        <BooksPageControls
+          search={search}
+          setSearch={setSearch}
+          filterOption={filterOption}
+          setFilterOption={setFilterOption}
+          categories={categories}
+        />
+        <BooksPageContent displayedBooks={paginatedBooks} />
 
-            <div className="pagination-bar">
-              <p className="pagination-info">
-                Showing <span>{start + 1}</span> to{" "}
-                <span>{Math.min(end, books.length)}</span> of{" "}
-                <span>{books.length}</span> results
-              </p>
+        <div className="pagination-bar">
+          <p className="pagination-info">
+            Showing <span>{start + 1}</span> to{" "}
+            <span>{Math.min(end, books.length)}</span> of{" "}
+            <span>{books.length}</span> results
+          </p>
 
-              <div className="pagination-actions">
-                <button
-                  className="btn btn--primary"
-                  onClick={handlePrevious}
-                  disabled={currentPage === 1}
-                >
-                  <ArrowBigLeft size={20} />
-                  Previous
-                </button>
+          <div className="pagination-actions">
+            <button
+              className="btn btn--primary"
+              onClick={handlePrevious}
+              disabled={currentPage === 1}
+            >
+              <ArrowBigLeft size={20} />
+              Previous
+            </button>
 
-                <button
-                  className="btn btn--primary"
-                  onClick={handleNext}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                  <ArrowBigRight size={20} />
-                </button>
-              </div>
-            </div>
+            <button
+              className="btn btn--primary"
+              onClick={handleNext}
+              disabled={currentPage === totalPages}
+            >
+              Next
+              <ArrowBigRight size={20} />
+            </button>
           </div>
         </div>
-      </Main>
-      <Footer />
-    </>
+      </div>
+    </div>
   );
 }
 

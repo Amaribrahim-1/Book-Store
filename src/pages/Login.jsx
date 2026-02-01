@@ -2,7 +2,6 @@ import { Eye, EyeOff, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Main from "../components/Main";
 import { useAuth } from "../contexts/AuthProvider";
 import { useTheme } from "../contexts/ThemeProvider";
 import { showNotification } from "../utils/showNotification";
@@ -28,7 +27,7 @@ function Login() {
     const result = login(email, password);
     if (result.success) {
       if (result.role === "user") navigate("/");
-      else navigate("/admin");
+      else navigate("/admin/books-management");
     }
 
     reset();

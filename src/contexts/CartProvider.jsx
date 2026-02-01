@@ -7,13 +7,26 @@ import {
   useState,
 } from "react";
 import { showNotification } from "../utils/showNotification";
+import { useAuth } from "./AuthProvider";
 
 const CartContext = createContext();
 
 function CartProvider({ children }) {
+  const { isAuthenticated } = useAuth();
+
   const [cartItems, setCartItems] = useState(
     () => JSON.parse(localStorage.getItem("cartItems")) || [],
   );
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const storedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCartItems(storedItems);
+    } else {
+      setCartItems([]);
+    }
+  }, [isAuthenticated]);
 
   const totalPrice = cartItems.reduce(
     (acc, cur) => acc + cur.price * cur.qauntity,
@@ -21,15 +34,23 @@ function CartProvider({ children }) {
   );
   const cartBadge = cartItems.reduce((acc, cur) => acc + cur.qauntity, 0);
 
-  useEffect(
-    function () {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    },
-    [cartItems],
-  );
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems, isAuthenticated]);
 
   const addToCart = useCallback(
     function addToCart(newItem, qauntity = 1) {
+      if (!isAuthenticated) {
+        showNotification(
+          "info",
+          "You must login at first",
+          localStorage.getItem("theme"),
+        );
+        return;
+      }
+
       const cartBook = cartItems.find((item) => item.id === newItem.id);
 
       const greaterThanStock =
@@ -67,7 +88,7 @@ function CartProvider({ children }) {
           localStorage.getItem("theme"),
         );
     },
-    [cartItems],
+    [cartItems, isAuthenticated],
   );
 
   const removeFromCart = useCallback(function removeFromCart(id) {
