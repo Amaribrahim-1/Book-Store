@@ -56,7 +56,7 @@ function BooksProvider({ children }) {
     async function getBooks() {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:8000/books");
+        const res = await axios.get("/data/books.json");
         setBooks(res.data);
       } catch (err) {
         setError("Failed to fetch books");
