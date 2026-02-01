@@ -7,6 +7,7 @@ import { useBooks } from "../contexts/BooksProvider";
 import useIsAdminRoute from "../hooks/useIsAdminRoute";
 import { showNotification } from "../utils/showNotification";
 import AdminActions from "./AdminActions";
+import { memo } from "react";
 
 function Book({ book }) {
   const { addToCart } = useCart();
@@ -55,10 +56,10 @@ function Book({ book }) {
             <span className="stock-badge in">In stock: {book.stock}</span>
           ))}
 
-        <img alt={book.img} src={book.img} />
+        <img alt={`Cover of ${book.title}`} src={book.img} loading="lazy" />
         <div className="book-card__overlay">
           {!isAdminRoute && (
-            <Link to={`/${book.id}`}>
+            <Link to={`/books/${book.id}`}>
               <button className="btn btn--primary">View Details</button>
             </Link>
           )}
@@ -86,4 +87,4 @@ function Book({ book }) {
   );
 }
 
-export default Book;
+export default memo(Book);

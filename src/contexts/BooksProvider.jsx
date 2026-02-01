@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { useAuth } from "./AuthProvider";
@@ -24,7 +25,6 @@ function BooksProvider({ children }) {
     if (isAuthenticated) {
       const storedFavorites =
         JSON.parse(localStorage.getItem("favoriteBooks")) || [];
-      console.log(storedFavorites);
       setFavoriteBooks(storedFavorites);
     } else {
       setFavoriteBooks([]);
@@ -56,7 +56,7 @@ function BooksProvider({ children }) {
     async function getBooks() {
       try {
         setIsLoading(true);
-        const res = await axios.get(" http://localhost:8000/books");
+        const res = await axios.get("http://localhost:8000/books");
         setBooks(res.data);
       } catch (err) {
         setError("Failed to fetch books");
@@ -67,6 +67,18 @@ function BooksProvider({ children }) {
     }
     getBooks();
   }, []);
+
+  const value = useMemo(() => {
+    return {
+      books,
+      isLoading,
+      setIsLoading,
+      addToWishList,
+      removeFromWishList,
+      favoriteBooks,
+      setBooks,
+    };
+  }, [books, isLoading, addToWishList, removeFromWishList, favoriteBooks]);
 
   if (error) {
     return (
@@ -87,19 +99,7 @@ function BooksProvider({ children }) {
   }
 
   return (
-    <BooksContext.Provider
-      value={{
-        books,
-        isLoading,
-        setIsLoading,
-        addToWishList,
-        removeFromWishList,
-        favoriteBooks,
-        setBooks,
-      }}
-    >
-      {children}
-    </BooksContext.Provider>
+    <BooksContext.Provider value={value}>{children}</BooksContext.Provider>
   );
 }
 

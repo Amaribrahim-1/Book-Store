@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { createPortal } from "react-dom";
 
 function ConfirmationModal({
@@ -46,4 +47,4 @@ function ConfirmationModal({
   );
 }
 
-export default ConfirmationModal;
+export default memo(ConfirmationModal);

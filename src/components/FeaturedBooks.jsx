@@ -13,7 +13,7 @@ function FeaturedBooks() {
         <h2 className="section-title">Featured Books</h2>
         <ul className="books-grid books-grid--featured">
           {books.map(
-            (book, index) => index < 3 && <Book book={book} key={book.id} />,
+            (book, index) => index < 4 && <Book book={book} key={book.id} />,
           )}
         </ul>
       </div>

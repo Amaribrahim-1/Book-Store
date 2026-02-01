@@ -1,5 +1,5 @@
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BooksPageContent from "../components/BooksPageContent";
 import BooksPageControls from "../components/BooksPageControls";
 import BooksPageHeader from "../components/BooksPageHeader";
@@ -13,7 +13,9 @@ function BooksPage() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const categories = ["All", ...new Set(books.map((book) => book.category))];
+  const categories = useMemo(() => {
+    return ["All", ...new Set(books.map((book) => book.category))];
+  }, [books]);
 
   let displayedBooks = books;
 
@@ -28,7 +30,7 @@ function BooksPage() {
     book.title.toLowerCase().includes(search.trim().toLowerCase()),
   );
 
-  const booksPerPage = 12;
+  const booksPerPage = 8;
   const start = (currentPage - 1) * booksPerPage;
   const end = start + booksPerPage;
 
@@ -36,17 +38,9 @@ function BooksPage() {
 
   const totalPages = Math.ceil(displayedBooks.length / booksPerPage);
 
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-
   function handlePrevious() {
     setCurrentPage((cur) => {
       if (cur > 1) {
-        scrollToTop();
         return cur - 1;
       }
       return cur;
@@ -56,7 +50,6 @@ function BooksPage() {
   function handleNext() {
     setCurrentPage((cur) => {
       if (cur < totalPages) {
-        scrollToTop();
         return cur + 1;
       }
       return cur;
@@ -70,6 +63,10 @@ function BooksPage() {
     },
     [search, filterOption],
   );
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   if (isLoading) return <Spinner message={"Loading books..."} />;
 

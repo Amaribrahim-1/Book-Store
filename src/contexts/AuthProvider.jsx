@@ -26,8 +26,6 @@ function reducer(state, action) {
   }
 }
 
-// Json-server??
-
 const users = [
   {
     email: "admin@test.com",

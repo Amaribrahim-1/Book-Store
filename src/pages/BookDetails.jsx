@@ -1,5 +1,5 @@
 import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useBooks } from "../contexts/BooksProvider";
@@ -7,8 +7,8 @@ import { useCart } from "../contexts/CartProvider";
 
 import Book from "../components/Book";
 import Spinner from "../components/Spinner";
-import { showNotification } from "../utils/showNotification";
 import { useAuth } from "../contexts/AuthProvider";
+import { showNotification } from "../utils/showNotification";
 
 function BookDetails() {
   const navigate = useNavigate();
@@ -19,9 +19,13 @@ function BookDetails() {
   const { books, isLoading, addToWishList, favoriteBooks, removeFromWishList } =
     useBooks();
   const [quantity, setQuantity] = useState(1);
+
+  const displayedBook = useMemo(() => {
+    return books.find((book) => book.id === Number(id));
+  }, [books, id]);
+
   if (isLoading) return <Spinner message={"Loading book..."} />;
 
-  const displayedBook = books.find((book) => book.id === Number(id));
   if (!displayedBook) {
     return (
       <div className="page">
@@ -42,13 +46,13 @@ function BookDetails() {
 
   const totalPrice = quantity * displayedBook.price;
 
-  const relatedBooksIndexes = books.find(
-    (book) => book.id == Number(id),
-  )?.relatedBooks;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const relatedBooks = useMemo(() => {
+    const relatedIds = displayedBook?.relatedBooks;
+    if (!relatedIds) return [];
 
-  const relatedBooks = books.filter((book) =>
-    relatedBooksIndexes.includes(book.id),
-  );
+    return books.filter((book) => relatedIds.includes(book.id));
+  }, [books, displayedBook]);
 
   const isBookExisted = favoriteBooks.find(
     (favBook) => favBook.id === Number(id),

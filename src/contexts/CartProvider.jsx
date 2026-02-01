@@ -28,11 +28,13 @@ function CartProvider({ children }) {
     }
   }, [isAuthenticated]);
 
-  const totalPrice = cartItems.reduce(
-    (acc, cur) => acc + cur.price * cur.qauntity,
-    0,
-  );
-  const cartBadge = cartItems.reduce((acc, cur) => acc + cur.qauntity, 0);
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((acc, cur) => acc + cur.price * cur.qauntity, 0);
+  }, [cartItems]);
+
+  const cartBadge = useMemo(() => {
+    return cartItems.reduce((acc, cur) => acc + cur.qauntity, 0);
+  }, [cartItems]);
 
   useEffect(() => {
     if (!isAuthenticated) return;

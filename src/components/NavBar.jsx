@@ -13,17 +13,17 @@ import {
   X,
 } from "lucide-react";
 
+import { useAuth } from "../contexts/AuthProvider";
 import { useCart } from "../contexts/CartProvider";
 import { useTheme } from "../contexts/ThemeProvider";
 import Cart from "./Cart";
-import { useAuth } from "../contexts/AuthProvider";
 
 function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { cartBadge } = useCart();
-  const { isAuthenticated, logout, role } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -75,6 +75,7 @@ function NavBar() {
             <button
               className="icon-btn cart-btn"
               onClick={() => setIsCartOpen((isCartOpen) => !isCartOpen)}
+              aria-label="Open cart"
             >
               <ShoppingCart size={20} />
               {cartBadge > 0 && <span className="cart-badge">{cartBadge}</span>}
@@ -86,6 +87,7 @@ function NavBar() {
               <button
                 onClick={logout}
                 className="btn btn--primary btn--md logout-btn"
+                aria-label="Logout"
               >
                 Logout
               </button>

@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { memo } from "react";
 
 function BooksPageControls({
   search,
@@ -37,4 +38,4 @@ function BooksPageControls({
   );
 }
 
-export default BooksPageControls;
+export default memo(BooksPageControls);
