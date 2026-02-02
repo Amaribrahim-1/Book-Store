@@ -155,7 +155,7 @@ function BookDetails() {
                 className="btn btn--primary btn--lg"
                 onClick={() => handleAdd(displayedBook)}
               >
-                Add to Cart ${totalPrice}.00
+                Add to Cart ${totalPrice}
               </button>
             </div>
           </div>
