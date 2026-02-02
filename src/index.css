@@ -2067,7 +2067,8 @@ a:hover {
 }
 
 .password-field .form-input {
-  padding-right: calc(var(--spacing-xl) + var(--spacing-md));
+  /* padding-right: calc(var(--spacing-xl) + var(--spacing-md)); */
+  width: 100%;
 }
 
 .password-toggle {
