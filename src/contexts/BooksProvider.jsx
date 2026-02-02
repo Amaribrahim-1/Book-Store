@@ -81,7 +81,7 @@ function BooksProvider({ children }) {
     };
   }, [books, isLoading, addToWishList, removeFromWishList, favoriteBooks]);
 
-  if (isLoading) return <Spinner message="Loading Books" />;
+  if (isLoading) return <Spinner message="Loading Books..." />;
   if (error) {
     return (
       <div className="page">
