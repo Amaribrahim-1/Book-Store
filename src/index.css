@@ -2148,7 +2148,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .header__content {
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   .filter-toggle {
@@ -2162,14 +2162,25 @@ a:hover {
   }
 
   .header__content .logo {
-    font-size: var(--font-size-md);
+    font-size: 0.9rem;
+  }
+  .header__content .logo svg {
+    /* font-size: 0.6rem; */
+    width: 24px;
+    height: 24px;
   }
 
   .header__actions {
     gap: var(--spacing-xs);
   }
+  .login-btn,
+  .logout-btn {
+    padding: 0.5rem 0.7rem;
+    font-size: var(--font-size-md);
+  }
   .menu-toggle {
     display: flex;
+    padding: 0;
   }
 
   .mobile-nav {
@@ -2233,11 +2244,6 @@ a:hover {
   .pagination-actions {
     width: 100%;
     justify-content: center;
-  }
-
-  .Toastify {
-    top: 20px;
-    right: 20px;
   }
 }
 
