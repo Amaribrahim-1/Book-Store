@@ -9,7 +9,7 @@ function Banner() {
           alt="BookHaven - Your Online Bookstore"
           className="hero__image"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
       </div>
 
