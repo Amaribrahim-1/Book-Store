@@ -40,7 +40,7 @@ function Cart({ setIsCartOpen }) {
           <div className="shopping-cart__footer">
             <div className="shopping-cart__total">
               <span>Total:</span>
-              <span>${totalPrice}</span>
+              <span>${totalPrice.toFixed(2)}</span>
             </div>
             <button className="btn btn--primary btn--block">Checkout</button>
           </div>
