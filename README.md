@@ -4,6 +4,23 @@ A modern online bookstore built with React, focusing on real-world e-commerce lo
 
 This project is part of my frontend journey, focusing on writing clean, scalable, and maintainable React applications.
 
+## Screenshots
+
+### Home Page
+![Home Page](Screenshots/home.jpg)
+
+### Books Page
+![Books Page](Screenshots/search_filter.jpg)
+
+### Book Details
+![Book Details](Screenshots/book_details.jpg)
+
+### Shopping Cart
+![Shopping Cart](Screenshots/cart.jpg)
+
+### Admin Panel
+![Admin Panel](Screenshots/admin.jpg)
+
 ## Features
 
 ### User Features
