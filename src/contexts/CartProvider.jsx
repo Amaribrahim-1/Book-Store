@@ -47,7 +47,7 @@ function CartProvider({ children }) {
       if (!isAuthenticated) {
         showNotification(
           "info",
-          "You must login at first",
+          "You need to be logged in to continue",
           localStorage.getItem("theme"),
         );
         return;
@@ -55,6 +55,7 @@ function CartProvider({ children }) {
 
       const cartBook = cartItems.find((item) => item.id === newItem.id);
 
+      // Sync the stock with UI...
       const greaterThanStock =
         cartBook?.qauntity > newItem.stock - 1 ||
         qauntity + cartBook?.qauntity > newItem.stock;
